@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable"; // Ensure you have this package installed
 import "./card.css"; // Import the CSS file
-import Cardimg from "./Resource/cardimg.jpg";
 import Favicon from "./Resource/favicon.png";
 import Logo from "./Resource/logo2.png";
 import "jspdf-autotable"; // Ensure you have this package installed
 import "./card.css"; // Import the CSS file
-import Loader from "./Svgloader";
-
+import { useNavigate } from "react-router-dom";
+import Payment from "./payment"
 const parseMealPlanData = (mealPlan) => {
   if (typeof mealPlan !== "string" || mealPlan.trim() === "") {
     return [];
@@ -149,16 +148,27 @@ const CardNavigator = ({ setLoading }) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [selectedPreferredMeal, setSelectedPreferredMeal] = useState("");
   const [selectedServings, setSelectedServings] = useState("");
-  const [mealPlanData, setMealPlanData] = useState(null);
-  // const [loading, setLoading] = useState(false);
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
+   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [loginError, setLoginError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [hasGeneratedPDF, setHasGeneratedPDF] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
       setIsLoggedIn(true);
+    }
+  }, []);
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setIsLoggedIn(true);
+      // Check if the user has already generated a PDF or is subscribed
+      const userData = JSON.parse(user);
+      setHasGeneratedPDF(userData.hasGeneratedPDF || false);
+      setIsSubscribed(userData.isSubscribed || false);
     }
   }, []);
 
@@ -320,20 +330,16 @@ const CardNavigator = ({ setLoading }) => {
         if (data.error) {
           setLoginError(data.error);
         } else {
-
-          
           setTimeout(() => {
-            setLoading(false)
-            loginsuccess()
-            
+            setLoading(false);
+            loginsuccess();
           }, 2000);
           
           setIsLoggedIn(true);
           localStorage.setItem("user", JSON.stringify(data));
           setCurrentCardIndex(5); // Move to card 6
-
-
-          generateAndSendPDF(loginData.email);
+          setHasGeneratedPDF(data.hasGeneratedPDF || false);
+          setIsSubscribed(data.isSubscribed || false);
         }
       })
       .catch((error) => {
@@ -344,75 +350,99 @@ const CardNavigator = ({ setLoading }) => {
       });
   };
 
-  const generateAndSendPDF = (email) => {
-    pdfmsg()
-    setLoading(true)
-    fetch("http://127.0.0.1:5000/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        preferredMeal: selectedPreferredMeal,
-        servings: selectedServings,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          throw new Error(data.error);
-        }
-       
-        const pdfData = generatePDF(data);
-        setLoading(false)
-        setTimeout(() => {
-          
-          pdfgenerated()
-        }, 2000);
 
-        setLoading(true)
-        sendingtomail()
-        return fetch("http://127.0.0.1:5000/send-pdf", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            pdf: pdfData,
-          }),
+
+  
+  const generateAndSendPDF = (email) => {
+    if (isSubscribed || !hasGeneratedPDF) {
+      pdfmsg();
+      setLoading(true);
+      fetch("http://127.0.0.1:5000/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          preferredMeal: selectedPreferredMeal,
+          servings: selectedServings,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            throw new Error(data.error);
+          }
+          const pdfData = generatePDF(data);
+          setLoading(false);
+          setTimeout(() => {
+            pdfgenerated();
+          }, 2000);
+
+          setLoading(true);
+          sendingtomail();
+          return fetch("http://127.0.0.1:5000/send-pdf", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              pdf: pdfData,
+            }),
+          });
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            throw new Error(data.error);
+          }
+          setLoading(false);
+          thankyou();
+          // Update user's PDF generation status
+          if (!isSubscribed) {
+            setHasGeneratedPDF(true);
+            const user = JSON.parse(localStorage.getItem("user"));
+            user.hasGeneratedPDF = true;
+            localStorage.setItem("user", JSON.stringify(user));
+          }
+        })
+        .catch((error) => {
+          alert("Error generating or sending PDF:", error);
+          alert(
+            "An error occurred while generating or sending the PDF. Please try again."
+          );
         });
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          throw new Error(data.error);
-        }
-        
-        
-        setLoading(false)
-        thankyou()
-      })
-      .catch((error) => {
-        alert("Error generating or sending PDF:", error);
-        alert(
-          "An error occurred while generating or sending the PDF. Please try again."
-        );
-      });
+    } else {
+      setShowPayment(true);
+    }
   };
+
+
+  const handlePaymentSuccess = () => {
+    setIsSubscribed(true);
+    setShowPayment(false);
+    const user = JSON.parse(localStorage.getItem("user"));
+    user.isSubscribed = true;
+    localStorage.setItem("user", JSON.stringify(user));
+    // Generate PDF after successful payment
+    generateAndSendPDF(user.email);
+  };
+
 
   const handleGeneratePDF = () => {
     hidecard();
     setLoading(true);
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.email) {
-     
-      generateAndSendPDF(user.email);
-      
-      setLoading(false)
+      if (isSubscribed || !hasGeneratedPDF) {
+        generateAndSendPDF(user.email);
+      } else {
+        setLoading(false);
+        // Navigate to payment page instead of showing payment component
+        navigate("/payment");
+      }
     } else {
-      
-      setLoading(false)
+      setLoading(false);
       alert("User email not found. Please log in again.");
     }
   };
@@ -632,20 +662,20 @@ const CardNavigator = ({ setLoading }) => {
           )}
           {currentCardIndex === 5 && (
             <>
-              {isLoggedIn ? (
-                <button className="cardbtn" onClick={handleGeneratePDF}>
-                  Generate PDF
-                </button>
-              ) : (
-                <>
-                  <button className="cardbtn2" onClick={handleBack}>
-                    Back
-                  </button>
-                  <button className="cardbtn" onClick={handleNext}>
-                    Next
-                  </button>
-                </>
-              )}
+               {isLoggedIn ? (
+            <button className="cardbtn" onClick={handleGeneratePDF}>
+              Generate PDF
+            </button>
+          ) : (
+            <>
+              <button className="cardbtn2" onClick={handleBack}>
+                Back
+              </button>
+              <button className="cardbtn" onClick={handleNext}>
+                Next
+              </button>
+            </>
+          )}
             </>
           )}
           

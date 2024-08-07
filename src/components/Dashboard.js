@@ -77,13 +77,13 @@ const Dashboard = () => {
     
     return (
       <>
-        <nav className=' py-6 px-14'>
+        <nav className='fixed z-50 top-0 bg-white  w-screen py-6 px-14'>
           <Link to="/">
           <img src={Logo} alt="" className='w-32' />
           </Link>
         </nav>
-        <div className="container mt-7  ml-14">
-          <h1 className='py-2    text-2xl font-bold  w-[80%]' style={{borderBottom:"1px solid #D3D3D3"}} >
+        <div className="z-50   fixed top-20 py-12 pb-0  bg-white w-screen   pl-14 pr-14">
+          <h1 className='py-2     text-2xl font-bold w-[80%] ' style={{borderBottom:"1px solid #D3D3D3"}} >
             My Files
           </h1>
         </div>
@@ -93,7 +93,7 @@ const Dashboard = () => {
         </ToggleButton>
         <DashboardContainer isSidebarOpen={isSidebarOpen}>
           
-          <div className='h-fit flex flex-wrap px-7 ' >
+          <div className='h-fit flex flex-wrap px-7 bg-white mt-40 ' >
           {pdfList.length > 0 ? (
   pdfList.map((pdf) => (
     <div key={pdf.id} onClick={() => handlePdfClick(pdf.data)} className='hover:scale-110   hover:cursor-pointer shadow-md m-2 w-40 flex flex-col items-center justify-center h-40 px-5'>

@@ -1,131 +1,160 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 
-function payment() {
+
+function Payment() {
+  const [paymentMethod, setPaymentMethod] = useState('credit');
+
+  const handlePaymentSubmit = (e) => {
+    e.preventDefault();
+    // Here you would handle the payment processing
+    console.log("Payment submitted");
+    // After successful payment, you would update the user's subscription status
+    // and redirect them back to the main application
+  };
+
   return (
-    <div className="  px-5 flex  flex-col items-center h-screen justify-center border-2  w-screen">
-      <div className="mb-4  flex  flex-col items-center">
-        <h2 className="text-2xl font-bold">Confirm order and pay</h2>
-        <span className="text-gray-700 text-center">
-          Please make the payment, after that you can enjoy all the features and
-          benefits.
-        </span>
-      </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-bold mb-4">Confirm Payment</h2>
+        <p className="text-gray-600 mb-6">
+          Please select a payment method and enter your details to complete your subscription.
+        </p>
 
-      <div className=" md:grid-cols-3 gap-4  w-fit ">
-        <div className="md:col-span-2">
-          <div className="bg-white p-4 rounded-lg shadow">
-            <h6 className="text-sm font-semibold uppercase">Payment details</h6>
+        <form onSubmit={handlePaymentSubmit}>
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold mb-2">Payment Method</h3>
+            <div className="flex space-x-4">
+              <button
+                type="button"
+                className={`flex items-center justify-center p-3 rounded-md ${
+                  paymentMethod === 'credit' ? 'bg-[#738065] text-white' : 'bg-gray-200'
+                }`}
+                onClick={() => setPaymentMethod('credit')}
+              >
+                <FontAwesomeIcon  className="mr-2" />
+                Credit Card
+              </button>
+              <button
+                type="button"
+                className={`flex items-center justify-center p-3 rounded-md ${
+                  paymentMethod === 'paypal' ? 'bg-[#738065] text-white' : 'bg-gray-200'
+                }`}
+                onClick={() => setPaymentMethod('paypal')}
+              >
+                <FontAwesomeIcon  className="mr-2" />
+                PayPal
+              </button>
+              <button
+                type="button"
+                className={`flex items-center justify-center p-3 rounded-md ${
+                  paymentMethod === 'applepay' ? 'bg-[#738065] text-white' : 'bg-gray-200'
+                }`}
+                onClick={() => setPaymentMethod('applepay')}
+              >
+                <FontAwesomeIcon  className="mr-2" />
+                Apple Pay
+              </button>
+              <button
+                type="button"
+                className={`flex items-center justify-center p-3 rounded-md ${
+                  paymentMethod === 'googlepay' ? 'bg-[#738065] text-white' : 'bg-gray-200'
+                }`}
+                onClick={() => setPaymentMethod('googlepay')}
+              >
+                <FontAwesomeIcon  className="mr-2" />
+                Google Pay
+              </button>
+            </div>
+          </div>
 
-            <div className="mt-3">
+          {paymentMethod === 'credit' && (
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold mb-2">Credit Card Details</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  className="col-span-2 p-2 border rounded"
+                  placeholder="Card Number"
+                  required
+                />
+                <input
+                  type="text"
+                  className="p-2 border rounded"
+                  placeholder="MM/YY"
+                  required
+                />
+                <input
+                  type="text"
+                  className="p-2 border rounded"
+                  placeholder="CVV"
+                  required
+                />
+              </div>
+            </div>
+          )}
+
+          {paymentMethod === 'paypal' && (
+            <div className="mb-6">
+              <p>You will be redirected to PayPal to complete your payment.</p>
+            </div>
+          )}
+
+          {(paymentMethod === 'applepay' || paymentMethod === 'googlepay') && (
+            <div className="mb-6">
+              <p>Please confirm the payment on your device.</p>
+            </div>
+          )}
+
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold mb-2">Billing Information</h3>
+            <input
+              type="text"
+              className="w-full p-2 border rounded mb-2"
+              placeholder="Full Name"
+              required
+            />
+            <input
+              type="email"
+              className="w-full p-2 border rounded mb-2"
+              placeholder="Email Address"
+              required
+            />
+            <input
+              type="text"
+              className="w-full p-2 border rounded mb-2"
+              placeholder="Address"
+              required
+            />
+            <div className="grid grid-cols-2 gap-4">
               <input
                 type="text"
-                name="name"
-                className="form-input mt-1 block w-full"
-                placeholder="Name on card"
+                className="p-2 border rounded"
+                placeholder="City"
+                required
+              />
+              <input
+                type="text"
+                className="p-2 border rounded"
+                placeholder="Zip Code"
                 required
               />
             </div>
-
-            <div className="grid md:grid-cols-2 gap-4 mt-3">
-              <div>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="card-number"
-                    className="form-input mt-1 block w-full pl-10"
-                    placeholder="Card Number"
-                    required
-                  />
-                  <FontAwesomeIcon
-                    icon={faCreditCard}
-                    className="absolute top-3 left-3 text-gray-500"
-                  />
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="flex-1">
-                  <input
-                    type="text"
-                    name="expiry"
-                    className="form-input mt-1 block w-full"
-                    placeholder="Expiry"
-                    required
-                  />
-                </div>
-                <div className="flex-1">
-                  <input
-                    type="text"
-                    name="cvv"
-                    className="form-input mt-1 block w-full"
-                    placeholder="CVV"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 mb-4">
-              <h6 className="text-sm font-semibold uppercase">
-                Billing Address
-              </h6>
-              <div className="grid md:grid-cols-2 gap-4 mt-3">
-                <div>
-                  <input
-                    type="text"
-                    name="street-address"
-                    className="form-input mt-1 block w-full"
-                    placeholder="Street Address"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="city"
-                    className="form-input mt-1 block w-full"
-                    placeholder="City"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4 mt-2">
-                <div>
-                  <input
-                    type="text"
-                    name="state"
-                    className="form-input mt-1 block w-full"
-                    placeholder="State/Province"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="zip"
-                    className="form-input mt-1 block w-full"
-                    placeholder="Zip code"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
           </div>
 
-          <div className="mt-4   flex flex-row-reverse">
-            <button className="bg-[#738065] text-white px-4 py-2 rounded-full">
-              Pay $840
+          <div className="flex justify-between items-center">
+            <p className="text-xl font-bold">Total: $840.00</p>
+            <button
+              type="submit"
+              className=" text-white px-6 py-2 rounded-full hover:bg-[#8c9c7b] transition duration-200"
+            >
+              Complete Payment
             </button>
           </div>
-        </div>
-
-        <div></div>
+        </form>
       </div>
     </div>
   );
 }
 
-export default payment;
+export default Payment;
