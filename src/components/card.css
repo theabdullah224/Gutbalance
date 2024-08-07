@@ -1,0 +1,433 @@
+.cardContainer {
+  height: fit-content !important;
+  width: fit-content;
+  background-color: #738065;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 40px;
+  padding: 70px 50px;
+  box-sizing: border-box;
+  position: relative;
+}
+.cardfaviconinimg {
+  display: none;
+}
+.cardcontent {
+  width: 25vw;
+  color: white;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+.column {
+  padding: 0 !important;
+}
+
+.cardcontent label {
+  padding-left: 10px;
+}
+.radio {
+  display: flex;
+  align-items: c;
+  margin-bottom: 2vh;
+}
+.cardimage {
+  background-image: url("./Resource/cardimg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 450px;
+  height: 429px;
+  border-radius: 20px;
+}
+.cardfavicon {
+  position: absolute;
+  top: -5vw;
+  right: -5vw;
+  height: 150px;
+  width: 150px;
+}
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="radio"]:checked {
+  background-color: white;
+  border-color: grey;
+}
+.elementsContainer input[type="text"]::placeholder,
+.elementsContainer input[type="tel"]::placeholder,
+.elementsContainer input[type="email"]::placeholder,
+.elementsContainer input[type="password"]::placeholder {
+  color: white;
+}
+.elementsContainer input[type="text"],
+.elementsContainer input[type="tel"],
+.elementsContainer input[type="email"],
+.elementsContainer input[type="password"] {
+  width: 500px;
+  height: fit-content;
+  padding: 10px 0px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-radius: 50vw;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  margin-bottom: 1vh;
+  font-size: 1.1rem;
+  font-weight: 100;
+}
+.cardsections {
+  display: flex;
+  margin-top: 2vh;
+}
+.section {
+  padding: 0 10px 0 0px;
+}
+.cardfancytext {
+  border-bottom: 4px solid white;
+  display: inline-block;
+  font-size: 1.5rem;
+  margin-bottom: 2vh;
+  font-weight: 400;
+}
+.cardcontent h2 {
+  font-size: 2.7rem;
+  font-weight: 400;
+  margin-bottom: 3vh;
+}
+.cardp {
+  font-size: 1.1rem;
+  margin-bottom: 2vh;
+  font-weight: 100;
+}
+.section h5 {
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin-bottom: 1vh;
+}
+.section p {
+  font-size: 1.1rem;
+  margin-bottom: 2vh;
+  font-weight: 100;
+}
+.buttonContainer1 {
+  margin-top: 2vh;
+  display: flex;
+  gap: 20px;
+}
+
+.cardbtn {
+  background-color: white;
+  color: black;
+  border: 2px solid #738065;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 1.1rem;
+  padding: 12px 38px;
+}
+.cardbtn2 {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 1.1rem;
+  padding: 12px 38px;
+}
+@media screen and (max-width: 2082px) {
+  .elementsContainer input[type="text"],
+  .elementsContainer input[type="tel"],
+  .elementsContainer input[type="email"],
+  .elementsContainer input[type="password"] {
+    width: 350px;
+    height: fit-content;
+  }
+}
+@media screen and (min-width: 2173px) {
+  .cardfavicon {
+    top: -8vh;
+    right: -4vw;
+  }
+}
+@media screen and (max-width: 1578px) {
+  .cardContainer {
+    width: 1113px;
+    height: 800px;
+  }
+  .elementsContainer input[type="text"],
+  .elementsContainer input[type="tel"],
+  .elementsContainer input[type="email"],
+  .elementsContainer input[type="password"] {
+    width: 24vw;
+    padding-right: 20px;
+    font-size: 1.1rem !important;
+    font-weight: 100;
+  }
+  .cardimage {
+    width: 462px;
+    height: 446px;
+  }
+  .cardcontent h4 {
+    margin-bottom: 1vh;
+  }
+  .cardcontent h2 {
+    margin-bottom: 1vh;
+  }
+  .cardp {
+    margin-bottom: 1vh !important;
+    padding: 0 !important;
+  }
+  .radio {
+    text-wrap: nowrap;
+  }
+}
+
+@media screen and (max-width: 1273px) {
+  .cardContainer {
+    padding: 50px 73px !important;
+    height: fit-content !important;
+  }
+  .radio {
+    margin-bottom: 1vh;
+    padding: 0;
+  }
+
+  .column {
+    height: fit-content;
+  }
+  .column h5 {
+    margin-bottom: 1vh;
+  }
+}
+@media screen and (max-width: 1236px) {
+  .cardContainer {
+    width: 842px;
+    height: 800px;
+  }
+  .cardimage {
+    width: 350px;
+    height: 338px;
+  }
+  .cardcontent h4 {
+    margin-bottom: 1vh;
+    font-size: 1.5rem;
+  }
+  .cardcontent h2 {
+    font-size: 2rem;
+    margin-bottom: 1vh;
+  }
+  .cardp {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding: 0 !important;
+  }
+  .cardcontent h5 {
+    font-size: 1.5rem;
+  }
+  .cardfavicon {
+    height: 120px;
+    width: 120px;
+  }
+  .buttonContainer1 {
+    margin-top: 10px;
+  }
+  .cardsections {
+    margin-top: 1vh;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .cardcontent {
+    width: 40vw;
+  }
+  .cardcontent h4 {
+    font-size: 1rem;
+  }
+  .cardcontent h2 {
+    font-size: 1.6rem;
+  }
+  .cardp {
+    font-size: 1rem;
+  }
+  .section h5 {
+    font-size: 1rem;
+  }
+  .section p {
+    font-size: 0.8rem;
+  }
+  .cardfavicon {
+    width: 11vw;
+    height: 11vw;
+  }
+}
+@media screen and (max-width: 837px) {
+  .cardContainer {
+    width: 700px;
+  }
+  .cardimage {
+    width: 249px;
+    height: 240px;
+  }
+  .cardbtn {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 779px) {
+  .cardContainer {
+    width: 600px;
+  }
+  .cardimage {
+    width: 209px;
+    height: 200px;
+  }
+  .cardbtn {
+    height: 50px;
+  }
+  .cardbtn2 {
+    height: 50px;
+  }
+  .cardcontent h4 {
+    font-size: 0.8rem;
+  }
+  .cardcontent h2 {
+    font-size: 1.3rem;
+  }
+  .cardp {
+    font-size: 0.6rem;
+  }
+  .section h5 {
+    font-size: 0.8rem;
+  }
+  .section p {
+    font-size: 0.6rem;
+  }
+}
+@media screen and (max-width: 668px) {
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: fit-content !important;
+    padding: 0;
+  }
+  .cardcontent {
+    width: 85vw;
+    margin-top: 7vh;
+  }
+  .cardfavicon {
+    display: none;
+  }
+
+  .cardfaviconinimg {
+    display: block;
+    position: absolute;
+    top: -4vh;
+    right: -3vw;
+    width: 80px;
+    height: 80px;
+  }
+
+  .cardimage {
+    width: 400.68px;
+    height: 376.28px;
+    position: relative;
+  }
+  .cardcontent {
+    margin: 0;
+    margin-bottom: 5vh;
+  }
+  .cardContainer h4 {
+    font-size: 1.5rem;
+  }
+  .cardContainer h2 {
+    font-size: 2.7rem;
+    font-weight: 400;
+    margin-bottom: 3vh;
+  }
+  .cardp {
+    font-size: 1.1rem;
+    margin-bottom: 2vh;
+    font-weight: 100 !important;
+    padding-bottom: 10px;
+  }
+  .cardContainer h5 {
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+    font-weight: 400;
+  }
+  .section {
+    padding: 0;
+  }
+  .section p {
+    font-size: 1.1rem;
+    margin-bottom: 2vh;
+    font-weight: 100;
+  }
+  .cardsections {
+    flex-direction: column;
+  }
+
+  .elementsContainer {
+    margin-top: 5vh;
+  }
+  .elementsContainer input[type="text"],
+  .elementsContainer input[type="tel"],
+  .elementsContainer input[type="email"],
+  .elementsContainer input[type="password"] {
+    width: 100%;
+    padding-left: 30px;
+    margin: 0;
+    margin-bottom: 1vh;
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 431px) {
+  .cardimage {
+    width: 350.68px;
+    height: 326.28px;
+    position: relative;
+  }
+}
+@media screen and (max-width: 380px) {
+  .cardfaviconinimg {
+    top: -5vh;
+    right: -5vw;
+    width: 70px;
+    height: 70px;
+  }
+  .cardimage {
+    width: 300.68px;
+    height: 276.28px;
+    position: relative;
+  }
+}
+@media screen and (max-width: 336px) {
+  .cardfaviconinimg {
+    top: -5vh;
+    right: -5vw;
+    width: 70px;
+    height: 70px;
+  }
+  .cardimage {
+    width: 250.68px;
+    height: 226.28px;
+    position: relative;
+  }
+}

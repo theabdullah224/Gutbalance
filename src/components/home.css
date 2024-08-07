@@ -1,0 +1,61 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.home{
+    height: 120vh;
+    width: 100vw;
+    background-image: url("./Resource/bg.jpg"); 
+    background-position: top ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* padding-bottom: 10vh; */
+    box-sizing: border-box;
+    /* padding-left:12.5vw;
+    padding-right: 12.5vw;
+    box-sizing: border-box; */
+    
+}
+
+
+@media screen and (max-width:1586px){
+    .home{
+        background-position: 80% 0%;
+
+    }
+
+}
+
+
+@media screen and (max-width:750px) {
+    
+    
+    .home {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 1366px;
+        width: 100vw;
+        overflow: hidden;
+        background-image: url("./Resource/texture.jpg");
+        background-size: cover;
+        background-position: top center;
+        background-repeat: no-repeat;
+    }
+    
+    .home::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url("./Resource/bgmobile.jpg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: bottom center;
+        z-index: 2; /* Higher z-index for bgmobile image */
+    }
+    
+}

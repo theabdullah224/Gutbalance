@@ -1,0 +1,27 @@
+heading:
+font-size: 2.7rem;
+font-weight: 400;
+margin-bottom: 3vh;
+
+peragraph:
+font-size: 1.1rem;
+margin-bottom: 2vh;
+font-weight: 100;
+
+fancy text:
+border-bottom: 4px solid #73806580;
+display: inline-block;
+font-size: 1.5rem;
+margin-bottom: 2vh;
+font-weight: 400;
+
+button:
+    background-color: white;
+    color: #738065;
+    border: 2px solid #738065;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    font-size: 1.1rem;
+    padding: 16px 38px;

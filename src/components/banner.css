@@ -1,0 +1,145 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* font-size: 16px; */
+}
+
+.b-itemsbanner {
+  width: 100vw;
+  padding-left: 12.5vw;
+  margin-top: 17.21vh;
+  /* font-size: 1.7vw; */
+  /* font-weight: 400; */
+  z-index: 10;
+}
+
+.b-centerbanner,
+.b-h1banner {
+  width: 50vw;
+}
+
+.b-h1banner {
+  /* font-size: 4.2rem; */
+  /* font-weight: 400; */
+}
+
+.specialtxt {
+  color: #738065;
+}
+
+.b-h2banner {
+  border-bottom: 0.4vw solid #738065;
+  width: fit-content;
+  line-height: 0.8;
+  padding-top: 2vw;
+}
+
+.b-pbanner {
+  /* font-weight: 100; */
+  padding-top: 3.4vw;
+  /* font-size: 1.3rem; */
+}
+
+.b-btnbanner {
+  margin-top: 3vw;
+  width: fit-content;
+  height: fit-content;
+  /* font-size: 1.1rem; */
+  padding: 14px 27px;
+}
+
+@media screen and (max-width: 1900px) {
+  .b-itemsbanner {
+    margin-bottom: 2vh !important;
+    width: fit-content;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .b-itemsbanner {
+    margin-top: 8vh;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .b-itemsbanner {
+    margin-top: 9vh;
+  }
+  .b-h1banner {
+    /* font-size: calc(100px * (1000 / 1920)); */
+    width: 60vw;
+  }
+  .b-h2banner {
+    /* font-size: calc(55px * (1000 / 1920)); */
+    border-bottom: 0.8vw solid #738065;
+  }
+  .b-pbanner {
+    /* font-size: calc(30px * (1000 / 1920)); */
+  }
+  .b-btnbanner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 640px) {
+  .b-h2banner {
+    text-wrap: nowrap;
+    display: inline-block;
+  }
+}
+@media screen and (max-width: 530px) {
+  .b-centerbanner {
+    width: 60vw;
+  }
+}
+@media screen and (max-width: 1200px){
+
+}
+@media screen and (max-width: 750px) {
+  .b-itemsbanner {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 1600vh;
+    margin: 0;
+    padding: 0 12.5vw;
+  }
+
+  .b-h1banner {
+    /* font-size: 55px; */
+    width: 72vw;
+    margin-bottom: 3vh;
+    text-wrap: wrap;
+  }
+
+  .b-h2banner {
+    /* font-size: 29px; */
+    border-bottom: 1.4vw solid rgba(115, 128, 101, 0.5);
+    margin-bottom: 3vh;
+    text-wrap: nowrap;
+  }
+
+  .b-pbanner {
+    /* font-size: 26px; */
+    margin-bottom: 2vh;
+  }
+
+  .b-btnbanner {
+    margin-top: 3vw;
+    width: fit-content;
+    height: fit-content;
+    /* font-size: 1.1rem; */
+    padding: 14px 27px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .b-h2banner {
+    text-wrap: wrap;
+    line-height: normal;
+  }
+}
